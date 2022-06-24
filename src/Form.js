@@ -2,54 +2,61 @@ import React from 'react';
 
 const Form = (props) => {
   
-  const { submit } = props
+  const { submit, change, values, errors, disabled } = props
 
   const onSubmit = (evt) => {
     evt.preventDefault();
     submit();
   }
 
-  return (
-    <form className='form-container' onSubmit={onSubmit}>
+  const onChange = (evt) => {
+    const { name, value, type, checked } = evt.target;
+    const valueToUse = type === 'checkbox' ? checked : value;
+    change(name, valueToUse)
+  }
 
-      {/* <div className='errors'>
-        <div>{errors.username}</div>
-        <div>{errors.email}</div>
-      </div> */}
-      
-      <label>First Name: 
+  return (
+
+    <form className='form-container' onSubmit={onSubmit}>
+    <h1>Give us your money</h1>
+      <label>Username: 
         <input 
           type='text'
-          name='first_name'
+          name='username'
+          onChange={onChange}
+          value={values.username}
         />
-      </label>
-      <label>Last Name: 
-        <input 
-          type='text'
-          name='last_name'
-        />
+        {errors.username}
       </label>
       <label>Email: 
         <input 
           type='email'
           name='email'
+          onChange={onChange}
+          value={values.email}
         />
+        {errors.email}
       </label>
       <label>Password: 
         <input 
           type='text'
           name='password'
+          onChange={onChange}
+          value={values.password}
         />
+        {errors.password}
       </label>
       <label>Agree to Terms of Service:
         <input 
           type='checkbox'
-          name='ToS'
+          name='tos'
+          onChange={onChange}
+          checked={values.tos}
         />
+        {errors.tos}
       </label>
 
-      <button>Submit</button>
-
+      <button disabled={disabled}>Submit</button>
     </form>
   )
 }

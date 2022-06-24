@@ -1,9 +1,9 @@
 import React from 'react';
 
-const User = ({user}) => {
+const User = ({ user }) => {
   return (
     <div>
-      <p>{user.first_name + ' ' + user.last_name}</p>
+      <p>Username: {user.username}</p>
       <p>Email: {user.email}</p>
     </div>
   )
